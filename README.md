@@ -5,7 +5,7 @@ A realtime shared grid where anyone can claim tiles and see updates instantly.
 ## Tech choices
 - Backend: Node.js + Express + ws for lightweight WebSocket broadcasts.
 - State: In-memory grid with optional JSON persistence to disk.
-- Frontend: Vanilla JS with a stylized, responsive grid UI.
+- Frontend: JS with a stylized, responsive grid UI.
 
 ## Run locally
 1. Install dependencies: `npm install`
