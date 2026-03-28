@@ -21,9 +21,39 @@ const state = {
   player: null
 };
 
+function resolveWebSocketUrl() {
+  const params = new URLSearchParams(location.search);
+  const queryUrl = params.get("ws");
+  if (queryUrl) {
+    localStorage.setItem("shared-grid-ws", queryUrl);
+  }
+
+  const storedUrl = localStorage.getItem("shared-grid-ws");
+  const windowUrl = window.SHARED_GRID_WS_URL;
+  const rawUrl = windowUrl || storedUrl;
+
+  if (!rawUrl) {
+    const protocol = location.protocol === "https:" ? "wss" : "ws";
+    return `${protocol}://${location.host}`;
+  }
+
+  if (rawUrl.startsWith("ws://") || rawUrl.startsWith("wss://")) {
+    return rawUrl;
+  }
+
+  if (rawUrl.startsWith("https://")) {
+    return `wss://${rawUrl.slice("https://".length)}`;
+  }
+
+  if (rawUrl.startsWith("http://")) {
+    return `ws://${rawUrl.slice("http://".length)}`;
+  }
+
+  return rawUrl;
+}
+
 function connect() {
-  const protocol = location.protocol === "https:" ? "wss" : "ws";
-  const socket = new WebSocket(`${protocol}://${location.host}`);
+  const socket = new WebSocket(resolveWebSocketUrl());
   activeSocket = socket;
 
   socket.addEventListener("open", () => {
