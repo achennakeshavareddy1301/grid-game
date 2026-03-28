@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shared Grid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="glow"></div>
+    <header class="topbar">
+      <div>
+        <h1>Shared Grid</h1>
+        <p>Claim tiles in real time. Be fast, be bold.</p>
+      </div>
+      <div class="status" id="status">Connecting...</div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="card">
+          <h2>Your presence</h2>
+          <div class="presence">
+            <span class="swatch" id="userColor"></span>
+            <div>
+              <div class="name" id="userName">Player</div>
+              <div class="sub" id="userId">Connecting...</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Stats</h2>
+          <div class="stats">
+            <div>
+              <div class="label">Claimed</div>
+              <div class="value" id="claimedCount">0</div>
+            </div>
+            <div>
+              <div class="label">Total</div>
+              <div class="value" id="totalCount">0</div>
+            </div>
+          </div>
+          <div class="leaderboard" id="leaderboard"></div>
+        </div>
+        <div class="card">
+          <h2>Zoom</h2>
+          <input id="zoom" type="range" min="12" max="28" value="18" />
+        </div>
+      </section>
+
+      <section class="grid-wrap">
+        <div class="grid" id="grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <div class="modal" id="nameModal" aria-hidden="true">
+      <div class="modal-card">
+        <h2>Pick a name</h2>
+        <p>Show up on the board with a name your friends recognize.</p>
+        <form id="nameForm">
+          <input id="nameInput" type="text" maxlength="20" placeholder="Cosmic Panda" required />
+          <button type="submit">Enter</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
